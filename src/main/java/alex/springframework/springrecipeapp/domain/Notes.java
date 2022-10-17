@@ -1,7 +1,12 @@
 package alex.springframework.springrecipeapp.domain;
 
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+
 import javax.persistence.*;
 
+@Data
+@EqualsAndHashCode(exclude = {"recipe"})
 @Entity
 public class Notes {
 
@@ -9,34 +14,10 @@ public class Notes {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Lob  // Allows persisting long strings as a glob
-    private String notes;
-
     @OneToOne
     private Recipe recipe;
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getNotes() {
-        return notes;
-    }
-
-    public void setNotes(String notes) {
-        this.notes = notes;
-    }
-
-    public Recipe getRecipe() {
-        return recipe;
-    }
-
-    public void setRecipe(Recipe recipe) {
-        this.recipe = recipe;
-    }
+    @Lob
+    private String recipeNotes;
 
 }
